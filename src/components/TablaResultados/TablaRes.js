@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+
 const TablaRes = () => {
   // Obtener datos del localStorage
  const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];

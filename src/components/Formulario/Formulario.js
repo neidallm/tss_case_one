@@ -43,11 +43,11 @@ const Formulario = () => {
     }
     onSubmit={(values)=>{
         console.log(values);
-        const datos = {
+        const datos = [{
             nroTrabajadores:values.nroTrabajadores,
             sueldo:values.sueldo,
             costoEspera:values.costoEspera
-        }
+        },];
         const infoString = JSON.stringify(datos);
         localStorage.setItem('datos', infoString);
     }}
