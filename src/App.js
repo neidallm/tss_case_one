@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+
 import LandingPage from './paginas/LandingPage/LandingPage';
 import Calcular from './paginas/Calcular/Calcular';
 import Graficos from './paginas/Graficos/Graficos';
