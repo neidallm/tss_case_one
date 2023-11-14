@@ -3,10 +3,54 @@ import React from 'react'
 import  { useState } from 'react';
 import "./Formulario.css"
 import superMart from '../../Imagenes/descaga.png'
+import {tablaNroTrabajador,tablaAcumulada,factorial} from "./Tablas";
+
+
+const tablitaRes = [
+  {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
+  {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
+  {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
+  {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
+  {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
+  {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
+  {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
+]
 
 const Formulario = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+
+  const calcular = () =>{
+
+    const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];
+    const hayDatos = datosLocalStorage.length > 0;
+
+    tablaNroTrabajador.map((element)=>{
+      element.randon =  Math.floor(Math.random() * (element.max - element.min + 1)) + element.min ;
+    });
+
+    console.log(tablaNroTrabajador);
+
+    tablitaRes.map((element) => {
+      element.rand = Math.random();
+    
+      //console.log(tablaAcumulada.find((elem)=>element.rand >= elem.limInf && element.rand <= elem.limSup));
+      element.cantCamiones = tablaAcumulada.find((elem)=>element.rand >= elem.limInf && element.rand <= elem.limSup).nro;
+    
+      //console.log(tablaNroTrabajador.find((nroT)=>nroT.nro === datosLocalStorage[0].nroTrabajadores));
+      element.tmpEsperaMin = tablaNroTrabajador.find((nroT)=>nroT.nro === datosLocalStorage[0].nroTrabajadores)?.randon;
+      element.tiempoEsperaTotal = element.cantCamiones * tablaNroTrabajador.find((nroT)=>nroT.nro === datosLocalStorage[0].nroTrabajadores)?.randon;
+      element.costoEspera = element.tiempoEsperaTotal * datosLocalStorage[0].costPorMinuto;
+    });
+  }
+
+  const infoString = JSON.stringify(tablitaRes);
+  localStorage.setItem('tablaResp', infoString);
+
+  
+  console.log(tablitaRes);
+
+
   return (
     <div className='container'>
       <div class="row g-0">
@@ -51,7 +95,8 @@ const Formulario = () => {
         const datos = [{
             nroTrabajadores:values.nroTrabajadores,
             sueldo:values.sueldo,
-            costoEspera:values.costoEspera
+            costoEspera:values.costoEspera,
+            costPorMinuto:(values.costoEspera / 60)
         },];
         const infoString = JSON.stringify(datos);
         localStorage.setItem('datos', infoString);
@@ -62,6 +107,8 @@ const Formulario = () => {
           }, 2000);
         });
       
+        calcular();
+
         setShowSpinner(false);
         setSuccessMessage('Cálculo completado exitosamente');
        
