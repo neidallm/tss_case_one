@@ -2,10 +2,11 @@ import React from 'react';
 import logo from "../../Imagenes/Logo1.png"
 import './Header.css'
 const Header = () => {
+
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg miNavar ">
-        <div className="container">
           <a className="navbar-brand" href="/">
            <img src={logo} alt="Logo del supermercado" width={120}/>
           </a>
@@ -24,30 +25,30 @@ const Header = () => {
           </button>
 
           <div className="collapse navbar-collapse" id="basic-navbar-nav">
-            <ul className="navbar-nav me-auto">
-              <li className="nav-item">
+            <ul className="navbar-nav ">
+              <li className="miLista">
                 <a className="nav-link" href="/">
                   Inicio
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="miLista">
                 <a className="nav-link" href="/Calcular">
                   Calcular
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="miLista">
                 <a className="nav-link" href="/Graficos">
-                  Ver gráfico
+                  gráfico
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="miLista">
                 <a className="nav-link" href="/Tablas">
-                  ver tabla
+                  tabla
                 </a>
               </li>
             </ul>
           </div>
-        </div>
+        
       </nav>
     </div>
   );
