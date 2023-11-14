@@ -1,3 +1,16 @@
 .miNavar{
     background-color: rgba(233, 241, 241, 0.788);
 }
+
+.miLista{
+ display: inline-block;
+ padding: 5px;
+ margin: 1rem;
+ border-radius: 20%;
+ background-color: rgba(207, 206, 221, 0.103);
+}
+
+.miLista.clicked {
+    background-color: rgba(207, 206, 221, 0.5);
+  }
+

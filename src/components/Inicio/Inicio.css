@@ -5,4 +5,10 @@ padding: 2rem 4rem 0rem 4rem;
 
 .miRef{
     text-decoration: none;
+    color: white;
 }
+
+.container{
+    width: 100%;
+    min-height: 72vh;
+ }
