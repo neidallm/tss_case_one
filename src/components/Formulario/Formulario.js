@@ -2,9 +2,11 @@ import { Field, Formik } from 'formik';
 import React from 'react'
 import  { useState } from 'react';
 import "./Formulario.css"
+import superMart from '../../Imagenes/descaga.png'
 
 const Formulario = () => {
   const [showSpinner, setShowSpinner] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
   return (
     <div className='container'>
       <div class="row g-0">
@@ -43,9 +45,9 @@ const Formulario = () => {
       }
     }
 
-    onSubmit={(values, { setSubmitting })=>{
-        console.log(values);
-        setShowSpinner(true);
+    onSubmit={async (values, { setSubmitting }) => {
+      setShowSpinner(true);
+      console.log(values);
         const datos = [{
             nroTrabajadores:values.nroTrabajadores,
             sueldo:values.sueldo,
@@ -54,10 +56,17 @@ const Formulario = () => {
         const infoString = JSON.stringify(datos);
         localStorage.setItem('datos', infoString);
 
-        setTimeout(() => {
-          setShowSpinner(false); // Ocultar el spinner cuando la operación haya terminado
-          setSubmitting(false); // Indicar a Formik que la operación ha terminado
-        }, 2000);
+        await new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, 2000);
+        });
+      
+        setShowSpinner(false);
+        setSuccessMessage('Cálculo completado exitosamente');
+       
+      
+        setSubmitting(false);
     }}
  > 
 
@@ -88,7 +97,7 @@ const Formulario = () => {
                 />
                  {touched.sueldo && errors.sueldo && <div className="error" >{errors.sueldo}</div>}
             
-                 <label htmlFor='costoEspera' className='miLabel'>Costo deespera de los camiones por hora</label>
+                 <label htmlFor='costoEspera' className='miLabel'>Costo de espera de los camiones por hora</label>
                  <Field 
 
                  type="number" 
@@ -108,19 +117,27 @@ const Formulario = () => {
        )}
     </Formik>
     </div> 
-    <div class="col-md-6">
-    <br/><br/><br/><br/>
-    {showSpinner && (
-            <div className="d-flex justify-content-center">
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Cargando...</span>
-              </div>
-            </div>
-          )}
-    </div>
-        </div>
-    </div>
-  )
-}
 
-export default Formulario
+    <div className="col-md-6">
+  {!successMessage && (
+    <div>
+      {showSpinner ? (
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+      ) : (
+        <img src={superMart} alt="camion" key={showSpinner} />
+      )}
+    </div>
+  )}
+  {successMessage && <p>{successMessage}</p>}
+</div>
+
+      </div>
+    </div>
+  );
+};
+
+export default Formulario;
