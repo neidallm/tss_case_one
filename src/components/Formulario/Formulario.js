@@ -3,7 +3,7 @@ import React from 'react'
 import  { useState } from 'react';
 import "./Formulario.css"
 import superMart from '../../Imagenes/descaga.png'
-import {tablaNroTrabajador,tablaAcumulada,factorial} from "./Tablas";
+import {tablaNroTrabajador,tablaAcumulada,tablaComparativa,factorial} from "./Tablas";
 
 
 const tablitaRes = [
@@ -42,13 +42,17 @@ const Formulario = () => {
       element.tiempoEsperaTotal = element.cantCamiones * tablaNroTrabajador.find((nroT)=>nroT.nro === datosLocalStorage[0].nroTrabajadores)?.randon;
       element.costoEspera = element.tiempoEsperaTotal * datosLocalStorage[0].costPorMinuto;
     });
-  }
+    const infoString = JSON.stringify(tablitaRes);
+    localStorage.setItem('tablaResp', infoString);
 
-  const infoString = JSON.stringify(tablitaRes);
-  localStorage.setItem('tablaResp', infoString);
+  };
 
+
+  const comparar = () =>{
+    console.log(tablitaRes);
+  };
   
-  console.log(tablitaRes);
+
 
 
   return (
@@ -100,14 +104,17 @@ const Formulario = () => {
         },];
         const infoString = JSON.stringify(datos);
         localStorage.setItem('datos', infoString);
+        
+        calcular();
 
+        comparar();
         await new Promise((resolve) => {
           setTimeout(() => {
             resolve();
           }, 2000);
         });
       
-        calcular();
+
 
         setShowSpinner(false);
         setSuccessMessage('Cálculo completado exitosamente');

@@ -47,6 +47,29 @@ const tablaAcumulada = [{
     limSup:1
     }];
 
+
+    const tablaComparativa = [
+        {
+            nro:2,
+            costTotal:0,
+        },
+        {
+            nro:3,
+            costTotal:0,
+        },
+        {
+            nro:4,
+            costTotal:0,
+        },
+        {
+            nro:5,
+            costTotal:0,
+        },
+        {
+            nro:6,
+            costTotal:0,
+        }
+    ]
 export    function factorial(n) {
         if (n === 0 || n === 1) {
           return 1;
@@ -55,4 +78,4 @@ export    function factorial(n) {
         }
       }
 
-export  {tablaNroTrabajador, tablaAcumulada };
+export  {tablaNroTrabajador, tablaAcumulada, tablaComparativa };
