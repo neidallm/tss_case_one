@@ -3,8 +3,7 @@ import React from 'react'
 import  { useState } from 'react';
 import "./Formulario.css"
 import superMart from '../../Imagenes/descaga.png'
-import {tablaNroTrabajador,tablaAcumulada,tablaComparativa,factorial} from "./Tablas";
-
+import {tablaNroTrabajador,tablaAcumulada,tablaComparativa} from "./Tablas";
 
 const tablitaRes = [
   {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
@@ -14,34 +13,44 @@ const tablitaRes = [
   {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
   {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
   {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
+  {rand:0,cantCamiones:0,tmpEsperaMin:0,tiempoEsperaTotal:0,costoEspera:0},
 ]
+let objetoConMinimo = {
+  nro:0,
+  costTotal:0,
+};
 
-const Formulario = () => {
+  const Formulario = () => {
+
+  const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];
+  const hayDatos = datosLocalStorage.length > 0;
+  const res = JSON.parse(localStorage.getItem('res')) || [];
+  const  tablaCom = JSON.parse(localStorage.getItem('tablaComp')) || [];
+
+  
   const [showSpinner, setShowSpinner] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+
+  tablaNroTrabajador.map((element)=>{
+    element.randon =  Math.floor(Math.random() * (element.max - element.min + 1)) + element.min ;
+  });
+
+
 
   const calcular = () =>{
 
     const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];
-    const hayDatos = datosLocalStorage.length > 0;
-
-    tablaNroTrabajador.map((element)=>{
-      element.randon =  Math.floor(Math.random() * (element.max - element.min + 1)) + element.min ;
-    });
-
-    console.log(tablaNroTrabajador);
 
     tablitaRes.map((element) => {
       element.rand = Math.random();
     
-      //console.log(tablaAcumulada.find((elem)=>element.rand >= elem.limInf && element.rand <= elem.limSup));
       element.cantCamiones = tablaAcumulada.find((elem)=>element.rand >= elem.limInf && element.rand <= elem.limSup).nro;
     
-      //console.log(tablaNroTrabajador.find((nroT)=>nroT.nro === datosLocalStorage[0].nroTrabajadores));
       element.tmpEsperaMin = tablaNroTrabajador.find((nroT)=>nroT.nro === datosLocalStorage[0].nroTrabajadores)?.randon;
       element.tiempoEsperaTotal = element.cantCamiones * tablaNroTrabajador.find((nroT)=>nroT.nro === datosLocalStorage[0].nroTrabajadores)?.randon;
       element.costoEspera = element.tiempoEsperaTotal * datosLocalStorage[0].costPorMinuto;
     });
+
     const infoString = JSON.stringify(tablitaRes);
     localStorage.setItem('tablaResp', infoString);
 
@@ -49,10 +58,38 @@ const Formulario = () => {
 
 
   const comparar = () =>{
-    console.log(tablitaRes);
+    
+    const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];
+    
+    let aux = 0;
+    let min = 0;
+
+    tablaComparativa.map((element,i)=>{
+      
+      tablitaRes.map((elem)=>{
+        aux += elem.costoEspera;
+      });
+
+      console.log(aux,(element.nro * datosLocalStorage[0].sueldo * 8 ));
+
+      element.costTotal = aux + (element.nro * datosLocalStorage[0].sueldo * 8 );
+      aux = 0;
+    });
+
+    const info = JSON.stringify(tablaComparativa);
+    localStorage.setItem('tablaComp', info);
+
+    objetoConMinimo = tablaComparativa.reduce(function (minimo, objetoActual) {
+      return (objetoActual.costTotal < minimo.costTotal) ? objetoActual : minimo;
+    }, tablaComparativa[0]);
+
+    const infoString = JSON.stringify(objetoConMinimo);
+    localStorage.setItem('res', infoString);
+
+    
   };
   
-
+  console.log(tablaComparativa);
 
 
   return (
@@ -108,15 +145,15 @@ const Formulario = () => {
         calcular();
 
         comparar();
+
         await new Promise((resolve) => {
           setTimeout(() => {
             resolve();
           }, 2000);
         });
       
-
-
         setShowSpinner(false);
+
         setSuccessMessage('Cálculo completado exitosamente');
        
       
@@ -181,12 +218,66 @@ const Formulario = () => {
             <span className="visually-hidden">Cargando...</span>
           </div>
         </div>
-      ) : (
+      ) : hayDatos ? ((
+        <>
+        <div>
+        <strong>Datos</strong> 
+        </div>
+        <p><strong>Cantidad Trabajadores</strong> : {datosLocalStorage[0].nroTrabajadores} <strong>Sueldo</strong> : {datosLocalStorage[0].sueldo} <strong>Costo de Espera</strong> : {datosLocalStorage[0].costoEspera}</p>
+        <br/>
+        {/* <p><strong>Sueldo</strong> : {datosLocalStorage[0].sueldo} </p>
+        <br/>
+        <p><strong>Costo de Espera</strong> : {datosLocalStorage[0].costEspera} </p>
+        <br/> */}
+        <table className="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Cantidad Empleados</th>
+              <th scope="col">Costo Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tablaCom.map((dato) => (
+              <tr >
+                <th>{dato.nro}</th>
+                <td>{dato.costTotal}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <br/>
+        <br/>
+        <p>La <strong>cantidad</strong> optima es de <strong>{res.nro}</strong>  trabajadores con un monto mínimo de <strong>{res.costTotal}</strong></p>
+        </>
+      )):((
         <img src={superMart} alt="camion" key={showSpinner} />
-      )}
+      ))}
     </div>
   )}
-  {successMessage && <p>{successMessage}</p>}
+  {successMessage && <>
+  
+    <br/>
+    <br/>
+    <table className="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Cantidad Empleados</th>
+              <th scope="col">Costo Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tablaComparativa.map((dato) => (
+              <tr >
+                <th>{dato.nro}</th>
+                <td>{dato.costTotal}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <br/>
+        <br/>
+        <p>La <strong>cantidad</strong> optima es de <strong>{objetoConMinimo.nro}</strong>  trabajadores con un monto mínimo de <strong>{objetoConMinimo.costTotal}</strong></p>
+  </>}
 </div>
 
       </div>

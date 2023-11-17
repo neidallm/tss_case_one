@@ -69,7 +69,10 @@ const tablaAcumulada = [{
             nro:6,
             costTotal:0,
         }
-    ]
+    ];
+
+
+
 export    function factorial(n) {
         if (n === 0 || n === 1) {
           return 1;

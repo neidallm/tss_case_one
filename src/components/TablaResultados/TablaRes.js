@@ -47,7 +47,7 @@ const TablaRes = () => {
           </tbody>
         </table>
       ) : (
-        <p>No hay datos en el localStorage.</p>
+        <p>No hay datos.</p>
       )}
     </div>
   );
