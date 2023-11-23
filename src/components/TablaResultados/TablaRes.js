@@ -1,21 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const TablaRes = () => {
 
+  
+  const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];
 
-  // Obtener datos del localStorage
- const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];
- const tablitaRes = JSON.parse(localStorage.getItem('tablaResp')) || [];
- const hayDatos = datosLocalStorage.length > 0;
+  const tablitaRes = JSON.parse(localStorage.getItem('tablaResp')) || [];
+  const tablaCom = JSON.parse(localStorage.getItem('tablaComp')) || [];
 
+  const hayDatos = datosLocalStorage.length > 0;
+  
+  const [num, setNum] = useState(datosLocalStorage[0]?.nroTrabajadores);
 
-  console.log(tablitaRes,datosLocalStorage);
-
+  const handleSelect = (event) => {
+    const selectedValue = parseInt(event.target.value, 10);
+    console.log(selectedValue);
+    setNum(selectedValue);
+  };
 
   return (
     <div className='container'>
-      <h1>Tabla de Resultados</h1>
+      <h1 >Tabla de Resultados</h1>
+      
       {hayDatos ? (
+
+        <>
+        <div class='row'>
+          <div class="col-md-7">
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Número Trabajadores</th>
+                  <th>Costo Total</th>
+                </tr>
+              </thead>
+              <tbody>
+              {tablaCom.map((dato) => (
+                <tr >
+                  <th>{dato.nro}</th>
+                  <td>{dato.costTotal}</td>
+                </tr>
+              ))}
+            </tbody>
+            </table>
+          </div>
+
+          <div class="col-md-5">
+            <select 
+            class="form-select" 
+            aria-label="Default select"
+            value={num}
+            onChange={handleSelect}
+            >
+            ({tablitaRes.map((e)=>{
+              return (<option value={e.nro} >{e.nro} Trabajadores</option>)
+            })})
+            </select>
+          </div>
+        </div>
+        <br/>
         <table className="table table-bordered">
           <thead>
             <tr>
@@ -31,21 +74,35 @@ const TablaRes = () => {
             </tr>
           </thead>
           <tbody>
-            {tablitaRes.map((dato,index) => (
-              <tr key={index}>
-                <th>{index+1}</th>
-                <td>{dato.rand}</td>
-                <td>{dato.cantCamiones}</td>
-                <td>{datosLocalStorage[0].nroTrabajadores}</td>
-                <td>{datosLocalStorage[0].sueldo*datosLocalStorage[0].nroTrabajadores}</td>
-                <td>{dato.tmpEsperaMin}</td>
-                <td>{dato.tiempoEsperaTotal}</td>
-                <td>{dato.costoEspera}</td>
-                <td>{dato.costoEspera + (datosLocalStorage[0].sueldo*datosLocalStorage[0].nroTrabajadores) }</td>
-              </tr>
-            ))}
+           {tablitaRes.map(e => {
+            return (e.nro === num? 
+              
+              e.tabla.map((elem,index)=>{
+                return (
+                  <>
+                  <tr key={index}>
+                    <th>{index+1}</th>
+                    <td>{elem.rand}</td>
+                    <td>{elem.cantCamiones}</td>
+                    <td>{e.nro}</td>
+                    <td>{datosLocalStorage[0].sueldo * e.nro}</td>
+                    <td>{elem.tmpEsperaMin}</td>
+                    <td>{elem.tiempoEsperaTotal}</td>
+                    <td>{elem.costoEspera}</td>
+                    <td>{elem.costoEspera + (datosLocalStorage[0].sueldo * e.nro) }</td>
+                  </tr>
+                  </>
+                )
+              }
+              
+              )
+              :<></>)
+           })}
+           
           </tbody>
         </table>
+        <br/>
+        </>
       ) : (
         <p>No hay datos.</p>
       )}
