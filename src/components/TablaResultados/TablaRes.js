@@ -38,7 +38,7 @@ const TablaRes = () => {
               {tablaCom.map((dato) => (
                 <tr >
                   <th>{dato.nro}</th>
-                  <td>{dato.costTotal}</td>
+                  <td>{Number((dato.costTotal).toFixed(2))}</td>
                 </tr>
               ))}
             </tbody>
@@ -82,14 +82,14 @@ const TablaRes = () => {
                   <>
                   <tr key={index}>
                     <th>{index+1}</th>
-                    <td>{elem.rand}</td>
+                    <td>{Number((elem.rand).toFixed(2))}</td>
                     <td>{elem.cantCamiones}</td>
                     <td>{e.nro}</td>
                     <td>{datosLocalStorage[0].sueldo * e.nro}</td>
                     <td>{elem.tmpEsperaMin}</td>
                     <td>{elem.tiempoEsperaTotal}</td>
-                    <td>{elem.costoEspera}</td>
-                    <td>{elem.costoEspera + (datosLocalStorage[0].sueldo * e.nro) }</td>
+                    <td>{Number(elem.costoEspera.toFixed(2))}</td>
+                    <td>{Number((elem.costoEspera + (datosLocalStorage[0].sueldo * e.nro)).toFixed(2)) }</td>
                   </tr>
                   </>
                 )
