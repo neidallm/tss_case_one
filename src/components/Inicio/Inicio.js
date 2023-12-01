@@ -9,7 +9,12 @@ const Inicio = () => {
        {/* <div class="card mb-3"style={{ maxWidth: '1350px',margin:'0' }}> */}
         <div class="row g-0"  >
           <div class="col-md-6">
-          <img src={ImgCamion}  alt="camion" />
+          <img
+  className="animate-fade-right animate-thrice animate-duration-2000 animate-delay-100"
+  src={ImgCamion}
+  alt="camion"
+/>
+
          </div>
          
          <div class="col-md-6">
