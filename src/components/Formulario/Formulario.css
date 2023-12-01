@@ -1,6 +1,7 @@
 .titulo{
     padding-top: 2%;
     text-align: center;
+    
 }
 
 .miLabel{
@@ -36,3 +37,6 @@
 }
 
 
+.Miboton{
+  margin-bottom: 2rem;
+}

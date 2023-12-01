@@ -1,47 +1,64 @@
-import React from 'react';
-import {tablaNroTrabajador,tablaAcumulada,factorial} from "./tablas";
-
-const tablitaRes = [
-  {rand:0,cantCamiones:0,tiempoEsperaTotal:0,costoEspera:0},
-  {rand:0,cantCamiones:0,tiempoEsperaTotal:0,costoEspera:0},
-  {rand:0,cantCamiones:0,tiempoEsperaTotal:0,costoEspera:0},
-  {rand:0,cantCamiones:0,tiempoEsperaTotal:0,costoEspera:0},
-  {rand:0,cantCamiones:0,tiempoEsperaTotal:0,costoEspera:0},
-  {rand:0,cantCamiones:0,tiempoEsperaTotal:0,costoEspera:0},
-  {rand:0,cantCamiones:0,tiempoEsperaTotal:0,costoEspera:0},
-]
+import React, { useState } from 'react';
 
 const TablaRes = () => {
 
-
-  // Obtener datos del localStorage
- const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];
- const hayDatos = datosLocalStorage.length > 0;
-
-tablaNroTrabajador.map((element)=>{
-  element.randon =  Math.floor(Math.random() * (element.max - element.min + 1)) + element.min ;
-});
-
-
-tablitaRes.map((element) => {
-  element.rand = Math.random();
-
-  //console.log(tablaAcumulada.find((elem)=>element.rand >= elem.limInf && element.rand <= elem.limSup));
-  element.cantCamiones = tablaAcumulada.find((elem)=>element.rand >= elem.limInf && element.rand <= elem.limSup).nro;
-
-  //console.log(tablaNroTrabajador.find((nroT)=>nroT.nro === datosLocalStorage[0].nroTrabajadores));
-  element.tiempoEsperaTotal = element.cantCamiones * tablaNroTrabajador.find((nroT)=>nroT.nro === datosLocalStorage[0].nroTrabajadores).randon;
-  element.costoEspera = element.tiempoEsperaTotal * (datosLocalStorage[0].costoEspera / 60) 
   
-});
+  const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];
 
-console.log(tablitaRes);
+  const tablitaRes = JSON.parse(localStorage.getItem('tablaResp')) || [];
+  const tablaCom = JSON.parse(localStorage.getItem('tablaComp')) || [];
 
+  const hayDatos = datosLocalStorage.length > 0;
+  
+  const [num, setNum] = useState(datosLocalStorage[0]?.nroTrabajadores);
+
+  const handleSelect = (event) => {
+    const selectedValue = parseInt(event.target.value, 10);
+    console.log(selectedValue);
+    setNum(selectedValue);
+  };
 
   return (
     <div className='container'>
-      <h1>Tabla de Resultados</h1>
+      <h1 >Tabla de Resultados</h1>
+      
       {hayDatos ? (
+
+        <>
+        <div class='row'>
+          <div class="col-md-7">
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Número Trabajadores</th>
+                  <th>Costo Total</th>
+                </tr>
+              </thead>
+              <tbody>
+              {tablaCom.map((dato) => (
+                <tr >
+                  <th>{dato.nro}</th>
+                  <td>{dato.costTotal}</td>
+                </tr>
+              ))}
+            </tbody>
+            </table>
+          </div>
+
+          <div class="col-md-5">
+            <select 
+            class="form-select" 
+            aria-label="Default select"
+            value={num}
+            onChange={handleSelect}
+            >
+            ({tablitaRes.map((e)=>{
+              return (<option value={e.nro} >{e.nro} Trabajadores</option>)
+            })})
+            </select>
+          </div>
+        </div>
+        <br/>
         <table className="table table-bordered">
           <thead>
             <tr>
@@ -57,22 +74,37 @@ console.log(tablitaRes);
             </tr>
           </thead>
           <tbody>
-            {tablitaRes.map((dato,index) => (
-              <tr key={index}>
-                <th>{index+1}</th>
-                <td>{dato.rand}</td>
-                <td>{dato.cantCamiones}</td>
-                <td>{datosLocalStorage[0].nroTrabajadores}</td>
-                <td>{datosLocalStorage[0].sueldo}</td>
-                <td>{dato.tiempoEsperaTotal}</td>
-                <td>{dato.handle}</td>
-                <td>{dato.handle}</td>
-              </tr>
-            ))}
+           {tablitaRes.map(e => {
+            return (e.nro === num? 
+              
+              e.tabla.map((elem,index)=>{
+                return (
+                  <>
+                  <tr key={index}>
+                    <th>{index+1}</th>
+                    <td>{elem.rand}</td>
+                    <td>{elem.cantCamiones}</td>
+                    <td>{e.nro}</td>
+                    <td>{datosLocalStorage[0].sueldo * e.nro}</td>
+                    <td>{elem.tmpEsperaMin}</td>
+                    <td>{elem.tiempoEsperaTotal}</td>
+                    <td>{elem.costoEspera}</td>
+                    <td>{elem.costoEspera + (datosLocalStorage[0].sueldo * e.nro) }</td>
+                  </tr>
+                  </>
+                )
+              }
+              
+              )
+              :<></>)
+           })}
+           
           </tbody>
         </table>
+        <br/>
+        </>
       ) : (
-        <p>No hay datos en el localStorage.</p>
+        <p>No hay datos.</p>
       )}
     </div>
   );
