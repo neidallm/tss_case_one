@@ -142,6 +142,7 @@ let objetoConMinimo = {
         initialValues={
           hayDatos?
           {
+            tipoDeCambio:datosLocalStorage[0].tipoDeCambio,
             nroTrabajadores:datosLocalStorage[0].nroTrabajadores,
             sueldo: datosLocalStorage[0].sueldo,
             costoEspera: datosLocalStorage[0].costoEspera,
@@ -151,6 +152,7 @@ let objetoConMinimo = {
             par3:datosLocalStorage[0].par3
           }:
           {
+            tipoDeCambio: 1,
             nroTrabajadores:'',
             sueldo:'',
             costoEspera:'',
@@ -242,7 +244,8 @@ let objetoConMinimo = {
             distribucion:values.distribucion,
             par1: values.par1,
             par2: values.par2,
-            par3: values.par3
+            par3: values.par3,
+            tipoDeCambio: values.tipoDeCambio
         },];
         const infoString = JSON.stringify(datos);
         localStorage.setItem('datos', infoString);
@@ -269,16 +272,28 @@ let objetoConMinimo = {
        {({ values, errors, touched, handleSubmit,})=>(
         <form ><br/>
           <div class="row mr-">
-            <br/><br/>
+            <br/>
+            <br/>
                <h5 className='titulo'><strong>Ingrese los datos</strong></h5><br/><br/>
               
+                <label htmlFor='tipoDeCambio:' className='miLabel'><strong>Tipo de Cambio</strong></label>
+                  <Field 
+                  as="select"
+                  class="form-control"  
+                  id='costoEspera'
+                  name='tipoDeCambio'   
+                  >
+                   <option value="2" >Bolivianos {"(Bs)"}</option>
+                   <option value="1" >Dólares {"$"}</option>
+                  </Field>
+
                  <label htmlFor='nroTrabajadores' className='miLabel'><strong>Nro. de Trabajadores</strong></label>
                  <Field 
                  type="number" 
                  class="form-control"  
                  id='nroTrabajadores' 
                  name='nroTrabajadores'  
-                 placeholder="Escriba aqui el nroTrabajadores"  
+                 placeholder="Ingrese la cantidad de trabajadores"  
                 />
                  {touched.nroTrabajadores && errors.nroTrabajadores && <div className="error" >{errors.nroTrabajadores}</div>}
 
@@ -289,7 +304,7 @@ let objetoConMinimo = {
                  class="form-control"  
                  id='sueldo'
                  name='sueldo'  
-                 placeholder="Escriba aqui el sueldo"  
+                 placeholder={values.tipoDeCambio == 2? "Ingrese el sueldo Bs/Hora":"Ingrese el sueldo $US/Hora"}  
                 />
                  {touched.sueldo && errors.sueldo && <div className="error" >{errors.sueldo}</div>}
             
@@ -300,7 +315,7 @@ let objetoConMinimo = {
                  class="form-control"  
                  id='costoEspera'
                  name='costoEspera'  
-                 placeholder="Escriba aqui el costoEspera"  
+                 placeholder={values.tipoDeCambio == 2? "Ingrese el costo Bs/Hora":"Ingrese el costo $US/Hora"}
                 />
                  {touched.costoEspera && errors.costoEspera && <div className="error" >{errors.costoEspera}</div>}
 
@@ -319,12 +334,13 @@ let objetoConMinimo = {
                   { values.distribucion == 1 ?
                   <>
                     <label htmlFor='par1' className='miLabel'><strong>Lambda</strong></label>
+                    <p className='miLabel'>{"(Cantidad de camiones promedio por hora)"}</p>
                     <Field 
                     type="number" 
                     class="form-control"  
                     id='costoEspera'
                     name='par1'  
-                    placeholder="Escriba aqui el par1"  
+                    placeholder="Promedio camiones/Hora"  
                     />
                     {touched.par1 && errors.par1 && <div className="error" >{errors.par1}</div>}
                  </>
@@ -420,15 +436,15 @@ let objetoConMinimo = {
           <tbody>
             {tablaCom.map((dato) => (
               <tr >
-                <th>{dato.nro}</th>
-                <td>{dato.costTotal}</td>
+                <th>{Number((dato.nro).toFixed(2))}</th>
+                <td>{Number((dato.costTotal).toFixed(2))}</td>
               </tr>
             ))}
           </tbody>
         </table>
         <br/>
         <br/>
-        <p>La <strong>cantidad</strong> óptima es de <strong>{res.nro}</strong>  trabajadores con un monto mínimo de <strong>{res.costTotal}</strong></p>
+        <p>La <strong>cantidad</strong> óptima es de <strong>{res.nro}</strong>  trabajadores con un monto mínimo de <strong>{ Number((res.costTotal).toFixed(2))}</strong></p>
         </>
       )):((
         <img src={superMart} alt="camion" key={showSpinner} />
