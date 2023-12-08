@@ -46,6 +46,11 @@ const Header = () => {
                 <strong>Tabla</strong>
                 </a>
               </li>
+              <li className="miLista">
+                <a className="nav-link" href="/Pdf">
+                <strong>Pdf</strong>
+                </a>
+              </li>
             </ul>
           </div>
         

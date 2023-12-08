@@ -94,24 +94,37 @@ const Inicio = () => {
        {/* <div class="card mb-3"style={{ maxWidth: '1350px',margin:'0' }}> */}
         <div class="row g-0"  >
           <div class="col-md-6">
-          <img
-  className="animate-fade-right animate-thrice animate-duration-2000 animate-delay-100"
-  src={ImgCamion}
-  alt="camion"
-/>
-
+         <img
+         className="animate-fade-right animate-thrice animate-duration-2000 animate-delay-100"
+         src={ImgCamion}
+         alt="camion"
+         />
          </div>
          
          <div class="col-md-6">
-          <br/><br/><br/><br/>
-            <h3 class="card-title">CASO DE ESTUDIO 1</h3>
+          <br/>
+          <div class="card text-center">
+             <div class="card-body">
+             <h3 class="card-title" >CASO DE ESTUDIO 1</h3><br/>
+              <p class="card-text parraf"> Una cadena de supermercados es abastecida por un almacén central. La mercancía que
+              llega a este almacén es descargada en turnos nocturnos. Los camiones que se descargan en
+              este almacén llegan en forma aleatoria de acuerdo a un proceso Poisson a una razón media
+              de X camiones por hora. El tiempo que un equipo de trabajadores se tarda en descargar
+              un camión, sigue una distribución uniforme, Si el número de trabajadores en el equipo se incrementa, entonces, la razón de servicio se incrementa. y Cada trabajador recibe Bs. Y por hora durante el turno
+              nocturno de ocho horas. El costo de tener un camión esperando se estima en Bs. Z.‐ por hora.</p>
               <p class="h5 card-text miParafo">
-               Encontrar el tamaño óptimo del equipo para minimizar el costo total, incluyendo salarios y costo por camiones esperando.</p><br/>
-              <br/>
-              
-              <button type="button"class="btn btn-secondary btn-lg">
+               Encontrar el tamaño óptimo del equipo para minimizar el costo total, incluyendo salarios y costo por camiones esperando.</p>
+            </div>
+            <button type="button"class="btn btn-secondary btn-lg">
                <a className="miRef" href='/Calcular'>Comenzar</a> 
               </button>
+          </div>
+                     
+             
+            
+             
+                            
+            
         
         {/* </div> */}
        </div>

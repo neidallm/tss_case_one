@@ -10,8 +10,7 @@ const Graficos = () => {
     <div>
         <Header/>
         <div className='container'>
-
-        <LineChart/>
+          <LineChart/>
         </div>
         <Footer/>
     </div>

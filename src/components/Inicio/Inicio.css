@@ -1,6 +1,6 @@
 .miParafo{
 display: block;
-padding: 2rem 4rem 0rem 4rem;
+padding: 1rem 3rem 0rem 3rem;
 }
 
 .miRef{
@@ -13,3 +13,7 @@ padding: 2rem 4rem 0rem 4rem;
     min-height: 72vh;
  }
 
+ .parraf{
+    color: #154e58c9;
+    font-weight: 500;
+ }

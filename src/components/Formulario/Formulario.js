@@ -11,6 +11,18 @@ let objetoConMinimo = {
   costTotal:0,
 };
 
+let datoslocales = [{
+  nroTrabajadores:"",
+  sueldo:"",
+  costoEspera:"",
+  costPorMinuto:"",
+  distribucion:"",
+  par1: "",
+  par2: "",
+  par3: "",
+  tipoDeCambio: ""
+},];
+
   const Formulario = () => {
 
   const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];
@@ -22,7 +34,7 @@ let objetoConMinimo = {
   const [showSpinner, setShowSpinner] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
-  tablaNroTrabajador.map((element)=>{
+  tablaNroTrabajador.map((element) => {
     element.randon =  Math.floor(Math.random() * (element.max - element.min + 1)) + element.min ;
   });
 
@@ -266,12 +278,14 @@ let objetoConMinimo = {
        
       
         setSubmitting(false);
+
+
     }}
  > 
 
        {({ values, errors, touched, handleSubmit,})=>(
         <form ><br/>
-          <div class="row mr-">
+          <div class="row mr-3">
             <br/>
             <br/>
                <h5 className='titulo'><strong>Ingrese los datos</strong></h5><br/><br/>
@@ -331,7 +345,7 @@ let objetoConMinimo = {
                    <option value="3" >Distribución Triángular</option>
                   </Field>
                   <br/>
-                  { values.distribucion == 1 ?
+                  { values.distribucion === 1 ?
                   <>
                     <label htmlFor='par1' className='miLabel'><strong>Lambda</strong></label>
                     <p className='miLabel'>{"(Cantidad de camiones promedio por hora)"}</p>
@@ -345,7 +359,7 @@ let objetoConMinimo = {
                     {touched.par1 && errors.par1 && <div className="error" >{errors.par1}</div>}
                  </>
                  :
-                 values.distribucion == 2?
+                 values.distribucion === 2?
                  <>
                     <label htmlFor='par1' className='miLabel'><strong>a</strong></label>
                       <Field 
@@ -367,7 +381,7 @@ let objetoConMinimo = {
                     />
                     {touched.par2 && errors.par2 && <div className="error" >{errors.par2}</div>}
 
-                 </>:values.distribucion == 3 ?
+                 </>:values.distribucion === 3 ?
                  <>
                  <label htmlFor='par1' className='miLabel'><strong>a</strong></label>
                   <Field 
@@ -415,11 +429,13 @@ let objetoConMinimo = {
     </div> 
 
     <div className="col-md-6">
-  {!successMessage && (
+      <br/>
+      <br/>
+    {!successMessage && (
     <div>
       {showSpinner ? (
         <div className="d-flex justify-content-center">
-          <div className="spinner-border" role="status">
+          <div className="spinner-border " role="status" style={{ width: '10rem', height: '10rem',borderWidth: '0.5em' }}>
             <span className="visually-hidden">Cargando...</span>
           </div>
         </div>
@@ -442,9 +458,13 @@ let objetoConMinimo = {
             ))}
           </tbody>
         </table>
+      
         <br/>
+        <p className='miParrafo'>Según la simulación con los datos Ingresados : Número de Trabajadores: <strong>{datosLocalStorage[0].nroTrabajadores}</strong> , Sueldo por hora de los empleados: <strong>{datosLocalStorage[0].sueldo}  {datosLocalStorage[0].tipoDeCambio == 2? "Bs": "$U$"}</strong>, Costo por hora de Espera de los camiones  : <strong>{datosLocalStorage[0].costoEspera} {datosLocalStorage[0].tipoDeCambio == 2? "Bs": "$U$"}</strong>
+        </p>
+        
         <br/>
-        <p>La <strong>cantidad</strong> óptima es de <strong>{res.nro}</strong>  trabajadores con un monto mínimo de <strong>{ Number((res.costTotal).toFixed(2))}</strong></p>
+        <p ><strong>RESPUESTA :</strong> La cantidad óptima que genera menos gastos en el proceso de descarga de los camiones es de : <strong>{res.nro}</strong>  trabajadores con un monto mínimo de : <strong>{Number((res.costTotal).toFixed(2))} {datosLocalStorage[0].tipoDeCambio == 2? "Bs": "$U$"}</strong> </p>
         </>
       )):((
         <img src={superMart} alt="camion" key={showSpinner} />
@@ -465,15 +485,19 @@ let objetoConMinimo = {
           <tbody>
             {tablaComparativa.map((dato) => (
               <tr >
-                <th>{dato.nro}</th>
-                <td>{dato.costTotal}</td>
+                <th>{Number((dato.nro).toFixed(2))}</th>
+                <td>{Number((dato.costTotal).toFixed(2))}</td>
               </tr>
             ))}
           </tbody>
-        </table>
+    </table>
         <br/>
         <br/>
-        <p>La <strong>cantidad</strong> optima es de <strong>{objetoConMinimo.nro}</strong>  trabajadores con un monto mínimo de <strong>{objetoConMinimo.costTotal}</strong></p>
+        <p className='miParrafo'>Según la simulación con los datos Ingresados : Número de Trabajadores: <strong>{datosLocalStorage[0].nroTrabajadores} </strong> , Sueldo por hora de los empleados: <strong>{datosLocalStorage[0].sueldo} {datosLocalStorage[0].tipoDeCambio == 2? "Bs": "$U$"}</strong>, Costo por hora de Espera de los camiones    : <strong>{datosLocalStorage[0].costoEspera} {datosLocalStorage[0].tipoDeCambio == 2? "Bs": "$U$"}</strong>
+        </p>
+        
+        <br/>
+        <p ><strong>RESPUESTA :</strong> La cantidad óptima que genera menos gastos en el proceso de descarga de los camiones es de : <strong>{res.nro}</strong>  trabajadores con un monto mínimo de : <strong>{Number((res.costTotal).toFixed(2))} {datosLocalStorage[0].tipoDeCambio == 2? "Bs": "$U$"}</strong> </p>
   </>}
 </div>
 
