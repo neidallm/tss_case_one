@@ -50,11 +50,11 @@ const PdfTablas = () => {
                       <td>{Number((elem.rand).toFixed(2))}</td>
                       <td>{elem.cantCamiones}</td>
                       <td>{e.nro}</td>
-                      <td>{datosLocalStorage[0].sueldo * e.nro}</td>
+                      <td>{datosLocalStorage[0].sueldo * e.nro} {datosLocalStorage[0].tipoDeCambio ==2? "Bs":"$U$"}</td>
                       <td>{elem.tmpEsperaMin}</td>
                       <td>{elem.tiempoEsperaTotal}</td>
-                      <td>{Number(elem.costoEspera.toFixed(2))}</td>
-                      <td>{Number((elem.costoEspera + (datosLocalStorage[0].sueldo * e.nro)).toFixed(2)) }</td>
+                      <td>{Number(elem.costoEspera.toFixed(2))} {datosLocalStorage[0].tipoDeCambio ==2? "Bs":"$U$"}</td>
+                      <td>{Number((elem.costoEspera + (datosLocalStorage[0].sueldo * e.nro)).toFixed(2)) } {datosLocalStorage[0].tipoDeCambio ==2? "Bs":"$U$"}</td>
                     </tr>
                     </>
                   )
@@ -82,7 +82,7 @@ const PdfTablas = () => {
                 {tablaCom.map((dato) => (
                   <tr >
                     <th>{dato.nro}</th>
-                    <td>{Number((dato.costTotal).toFixed(2))}</td>
+                    <td>{Number((dato.costTotal).toFixed(2))} {datosLocalStorage[0].tipoDeCambio ==2? "Bs":"$U$"}</td>
                   </tr>
                 ))}
               </tbody>

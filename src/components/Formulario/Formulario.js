@@ -44,18 +44,15 @@ let datoslocales = [{
       tablaAcumuladaC.map((elem)=>{
         elem.ran = poisson(a);
       })
-      
     } else if (dis == 2) {
       tablaAcumuladaC.map((elem)=>{
         elem.ran = uniform(a,b);
       })
- 
     } 
     // else if (dis == 3) {
     //   tablaAcumuladaC.map((elem)=>{
     //     elem.ran = triangular(a,b,c);
     //   })
- 
     // }
     console.log(tablaAcumuladaC);
     
@@ -181,65 +178,66 @@ let datoslocales = [{
            let errores = {};
 
           //validacion nroTrabajadores
-            if (!valores.nroTrabajadores) {             
+            if (!valores.nroTrabajadores || (valores.nroTrabajadores > 6 || valores.nroTrabajadores < 2)) {             
                errores.nroTrabajadores = "Por favor ingrese un valor entre 2-6"
             }else if (/^[a-zA-ZÀ-ÿ\s]{2,6}$/.test(valores.nroTrabajadores)) {
-              errores.nroTrabajadores = 'Solo puede contener numeros'
+              errores.nroTrabajadores = 'Solo puede contener números'
             }
        
             //validacion salario
-            if (!valores.sueldo) {             
+            if (!valores.sueldo || valores.sueldo < 1) {             
                 errores.sueldo = "Por favor ingrese un valor "
              }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.sueldo)) {
-               errores.sueldo = 'Solo puede contener numeros'
-             }
+               errores.sueldo = 'Solo puede contener números'
+        
+              }
 
              //validacion costo de espera
-            if (!valores.costoEspera) {             
+            if (!valores.costoEspera || valores.costoEspera < 1) {             
                 errores.costoEspera = "Por favor ingrese un valor "
              }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.costoEspera)) {
-               errores.costoEspera = 'Solo puede contener numeros'
+               errores.costoEspera = 'Solo puede contener números'
              }
 
              if (valores.distribucion == 1) {
               
               if (!valores.par1) {             
                 errores.par1 = "Por favor ingrese un valor"
-              }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.par1)) {
-                errores.par1 = 'Solo puede contener numeros'
+              }else if (/^[0-3]$/.test(valores.par1)) {
+                errores.par1 = 'Solo puede contener números'
               }
 
              } else if(valores.distribucion == 2) {
               
               if (!valores.par1) {             
                 errores.par1 = "Por favor ingrese un valor"
-              }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.par1)) {
-                errores.par1 = 'Solo puede contener numeros'
+              }else if (/^[a-zA-ZÀ-ÿ\s]{0,100}$/.test(valores.par1)) {
+                errores.par1 = 'Solo puede contener números'
               }
 
               if (!valores.par2) {             
                 errores.par2 = "Por favor ingrese un valor"
               }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.par2)) {
-                errores.par2 = 'Solo puede contener numeros'
+                errores.par2 = 'Solo puede contener números'
               }
 
              } else if(valores.distribucion == 3){
-              if (!valores.par1) {             
+              if (!valores.par1 || (valores.par1 > 3 || valores.par1 < 0)) {             
                 errores.par1 = "Por favor ingrese un valor"
-              }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.par1)) {
-                errores.par1 = 'Solo puede contener numeros'
+              }else if (/^[a-zA-ZÀ-ÿ\s]{0,3}$/.test(valores.par1)) {
+                errores.par1 = 'Solo puede contener números'
               }
               
               if (!valores.par2) {             
                 errores.par2 = "Por favor ingrese un valor"
               }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.par2)) {
-                errores.par2 = 'Solo puede contener numeros'
+                errores.par2 = 'Solo puede contener números'
               }
 
               if (!valores.par3) {             
                 errores.par3 = "Por favor ingrese un valor"
               }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.par3)) {
-                errores.par3 = 'Solo puede contener numeros'
+                errores.par3 = 'Solo puede contener números'
               }
              }
           return errores;
@@ -346,10 +344,9 @@ let datoslocales = [{
                    <option value="3" >Distribución Triángular</option>
                   </Field>
                   <br/>
-                  { values.distribucion === 1 ?
+                  { values.distribucion == 1 ?
                   <>
-                    <label htmlFor='par1' className='miLabel'><strong>Lambda</strong></label>
-                    <p className='miLabel'>{"(Cantidad de camiones promedio por hora)"}</p>
+                    <label htmlFor='par1' className='miLabel'><strong>Cantidad de camiones promedio por hora</strong></label>
                     <Field 
                     type="number" 
                     class="form-control"  
@@ -360,9 +357,9 @@ let datoslocales = [{
                     {touched.par1 && errors.par1 && <div className="error" >{errors.par1}</div>}
                  </>
                  :
-                 values.distribucion === 2?
+                 values.distribucion == 2?
                  <>
-                    <label htmlFor='par1' className='miLabel'><strong>a</strong></label>
+                    <label htmlFor='par1' className='miLabel'><strong>Mínimo de camiones</strong></label>
                       <Field 
                       type="number" 
                       class="form-control"  
@@ -372,7 +369,7 @@ let datoslocales = [{
                     />
                     {touched.par1 && errors.par1 && <div className="error" >{errors.par1}</div>}
 
-                    <label htmlFor='par2' className='miLabel'><strong>b</strong></label>
+                    <label htmlFor='par2' className='miLabel'><strong>Máximo de camiones</strong></label>
                       <Field 
                       type="number" 
                       class="form-control"  
@@ -382,9 +379,9 @@ let datoslocales = [{
                     />
                     {touched.par2 && errors.par2 && <div className="error" >{errors.par2}</div>}
 
-                 </>:values.distribucion === 3 ?
+                 </>:values.distribucion == 3 ?
                  <>
-                 <label htmlFor='par1' className='miLabel'><strong>a</strong></label>
+                 <label htmlFor='par1' className='miLabel'><strong>Mínimo de camiones</strong></label>
                   <Field 
                   type="number" 
                   class="form-control"  
@@ -394,7 +391,7 @@ let datoslocales = [{
                  />
                   {touched.par1 && errors.par1 && <div className="error" >{errors.par1}</div>}
 
-                 <label htmlFor='par2' className='miLabel'><strong>b</strong></label>
+                 <label htmlFor='par2' className='miLabel'><strong>Máximo de camiones</strong></label>
                   <Field 
                   type="number" 
                   class="form-control"  
@@ -404,7 +401,7 @@ let datoslocales = [{
                  />
                   {touched.par2 && errors.par2 && <div className="error" >{errors.par2}</div>}
 
-                 <label htmlFor='par3' className='miLabel'><strong>c</strong></label>
+                 <label htmlFor='par3' className='miLabel'><strong>Cantidad probable de camiones</strong></label>
                   <Field 
                   type="number" 
                   class="form-control"  
@@ -418,8 +415,9 @@ let datoslocales = [{
                  :<></>}
 
                 <div class="row">
-                  <div class='text-center botones' >
-                    <button  type='submit' onClick={handleSubmit}  class="btn btn-secondary registrarGuardia Miboton" >Calcular</button> 
+                <div class=' botones' >
+                    <button  type='submit' onClick={handleSubmit}  class="btn btn-primary registrarGuardia Miboton " >Calcular</button>  
+                    <button  type='submit' onClick={handleSubmit}  class="btn btn-secondary registrarGuardia Miboton " >Calcular</button> 
                   </div>
                     <br/>
                 </div>
@@ -454,7 +452,7 @@ let datoslocales = [{
             {tablaCom.map((dato) => (
               <tr >
                 <th>{Number((dato.nro).toFixed(2))}</th>
-                <td>{Number((dato.costTotal).toFixed(2))}</td>
+                <td>{Number((dato.costTotal).toFixed(2))} {datosLocalStorage[0].tipoDeCambio == 2? "Bs": "$U$"}</td>
               </tr>
             ))}
           </tbody>
@@ -487,7 +485,7 @@ let datoslocales = [{
             {tablaComparativa.map((dato) => (
               <tr >
                 <th>{Number((dato.nro).toFixed(2))}</th>
-                <td>{Number((dato.costTotal).toFixed(2))}</td>
+                <td>{Number((dato.costTotal).toFixed(2))} {datosLocalStorage[0].tipoDeCambio == 2? "Bs": "$U$"}</td>
               </tr>
             ))}
           </tbody>

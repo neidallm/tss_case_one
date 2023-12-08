@@ -5,6 +5,8 @@ import ChartDataLabels from 'chartjs-plugin-datalabels'; // Importa el plugin
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler, ChartDataLabels); // Registra el plugin
 
 const tablaC = JSON.parse(localStorage.getItem('tablaComp')) || [];
+const datos = JSON.parse(localStorage.getItem('datos')) || [];
+
 console.log(tablaC);
 
 let costo = [];
@@ -47,7 +49,7 @@ var misoptions = {
             color: 'black', // Puedes cambiar el color del texto de las etiquetas
             formatter: function(value) {
                 // Agrega saltos de línea (\n) o espacios para mover visualmente los datos hacia arriba
-                return '\n\n' + value.toFixed(2) + " Bs";
+                return '\n\n' + value.toFixed(2) + `${datos[0].tipoDeCambio ==2 ?" Bs":" $U$"}`;
             },
         }
     }
