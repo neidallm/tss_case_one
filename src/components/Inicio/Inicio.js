@@ -36,57 +36,33 @@ const Inicio = () => {
   // Ejemplo de uso con min = 0 y max = 4
   const resultado = calcularProbabilidadUniforme(0, 3);
 
-  console.log(resultado);
-
-  function calcularProbabilidadesTriangulares(a, b, c) {
-    // Validar que a, b y c sean números
-    if (typeof a !== 'number' || typeof b !== 'number' || typeof c !== 'number') {
-      console.error("Error: a, b y c deben ser números.");
-      return;
-    }
+  console.log(resultado);  
   
-    // Validar que a <= b <= c
-    if (a > b || b > c) {
-      console.error("Error: a debe ser menor o igual a b, y b debe ser menor o igual a c.");
-      return;
-    }
+  function customPoissonProbability(lambda, k) {
+    const weights = [0.4, 0.4, 0.2, 0.1, 0.1];
   
-    // Calcular la probabilidad de cada valor
-    const probabilidades = [];
+    // Ajusta los pesos según el valor de lambda
+    const adjustedWeights = weights.map((weight, i) => {
+      return weight * Math.pow(lambda, i);
+    });
   
-    for (let x = 0; x <= 3; x++) {
-      let probabilidad;
+    // Normaliza los pesos para que sumen 1
+    const totalWeight = adjustedWeights.reduce((sum, weight) => sum + weight, 0);
+    const normalizedWeights = adjustedWeights.map(weight => weight / totalWeight);
   
-      if (x < a) {
-        probabilidad = 0;
-      } else if (a <= x && x < b) {
-        probabilidad = 2 * (x - a) / ((b - a) * (c - a));
-      } else if (b <= x && x <= c) {
-        probabilidad = 2 * (c - x) / ((c - b) * (c - a));
-      } else {
-        probabilidad = 0;
-      }
+    // Calcula la probabilidad ponderada
+    const probability = normalizedWeights[k];
   
-      probabilidades.push({
-        valor: x,
-        probabilidad: probabilidad.toFixed(4)
-      });
-    }
-  
-    // Mostrar resultados
-    console.log("Valor | Probabilidad");
-    console.log("--------------------");
-    for (let i = 0; i < probabilidades.length; i++) {
-      console.log(`${probabilidades[i].valor}     | ${probabilidades[i].probabilidad}`);
-    }
-  
-    return probabilidades;
+    return probability;
   }
   
-  // Ejemplo de uso con a = 1, b = 2, y c = 3
-  const resultado1 = calcularProbabilidadesTriangulares(8, 12,13 );
+  // Ejemplo de uso
+  const lambda = 2; // Media de la distribución
   
-  console.log(resultado1);
+  for (let k = 0; k <= 4; k++) {
+    const probability = customPoissonProbability(lambda, k);
+    console.log(`Probabilidad de ${k} eventos con una media de ${lambda}: ${probability}`);
+  }
   
   return (
     <div>

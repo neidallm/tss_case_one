@@ -1,10 +1,10 @@
 import { Field, Formik, } from 'formik';
 import React from 'react'
 import  { useState } from 'react';
-import "./Formulario.css"
-import superMart from '../../Imagenes/descaga.png'
-import {tablaNroTrabajador,tablaAcumuladaC,tablaComparativa,tablaSelect,poisson,triangular,uniform} from "./Tablas";
-import { Select } from 'formik-material-ui';
+import './Formulario.css';
+import superMart from '../../Imagenes/descaga.png';
+import {tablaNroTrabajador,tablaAcumuladaC,tablaComparativa,tablaSelect} from './Tablas';
+import {poisson,uniform} from './Distribucion';
 
 let objetoConMinimo = {
   nro:0,
@@ -38,12 +38,13 @@ let objetoConMinimo = {
         elem.ran = uniform(a,b);
       })
  
-    } else if (dis == 3) {
-      tablaAcumuladaC.map((elem)=>{
-        elem.ran = triangular(a,b,c);
-      })
+    } 
+    // else if (dis == 3) {
+    //   tablaAcumuladaC.map((elem)=>{
+    //     elem.ran = triangular(a,b,c);
+    //   })
  
-    }
+    // }
     console.log(tablaAcumuladaC);
     
     let aux = 0;
@@ -353,7 +354,7 @@ let objetoConMinimo = {
                       class="form-control"  
                       id='costoEspera'
                       name='par1'  
-                      placeholder="Escriba aqui el par2"  
+                      placeholder="Mínimo de camiones/Hora"  
                     />
                     {touched.par1 && errors.par1 && <div className="error" >{errors.par1}</div>}
 
@@ -363,7 +364,7 @@ let objetoConMinimo = {
                       class="form-control"  
                       id='costoEspera'
                       name='par2'  
-                      placeholder="Escriba aqui el"  
+                      placeholder="Máximo de camiones/Hora"  
                     />
                     {touched.par2 && errors.par2 && <div className="error" >{errors.par2}</div>}
 

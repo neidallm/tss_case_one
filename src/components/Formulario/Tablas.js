@@ -138,43 +138,4 @@ const tablaAcumuladaC = [{
       ];
 
 
-
-    export    function factorial(n) {
-        if (n === 0 || n === 1) {
-          return 1;
-        } else {
-          return n * factorial(n - 1);
-        }
-      }
-
-    // Función para generar valores aleatorios con distribución de Poisson
-    export function poisson(lambda) {
-      const L = Math.exp(-lambda);
-      let k = 0;
-      let p = 1;
-    
-      do {
-        k++;
-        p *= Math.random();
-      } while (p > L);
-    
-      return (k - 1) / lambda;
-    }
-  
-  // Función para generar valores aleatorios con distribución triangular
-    export function triangular(min, mode, max) {
-      const u = Math.random();
-      if (u <= (mode - min) / (max - min)) {
-        return (min + Math.sqrt(u * (max - min) * (mode - min))) / max;
-      } else {
-        return (max - Math.sqrt((1 - u) * (max - min) * (max - mode))) / max;
-      }
-    }
-  
-  // Función para generar valores aleatorios con distribución uniforme
-    export function uniform(min, max) {
-      return (min + Math.random() * (max - min)) / max;
-    }
-  
-
 export  {tablaNroTrabajador, tablaAcumuladaC,tablaSelect, tablaComparativa};
