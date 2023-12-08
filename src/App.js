@@ -5,6 +5,9 @@ import LandingPage from './paginas/LandingPage/LandingPage';
 import Calcular from './paginas/Calcular/Calcular';
 import Graficos from './paginas/Graficos/Graficos';
 import Tablas from './paginas/Tablas/Tablas';
+import PaginaPdf from './paginas/PaginaPdf/PaginaPdf';
+
+
 
 function App() {
   return (
@@ -15,6 +18,8 @@ function App() {
              <Route path="/Calcular" element={<Calcular/>}/>
              <Route path="/Graficos" element={<Graficos/>}/>
              <Route path="/Tablas" element={<Tablas/>}/>
+             <Route path="/Pdf" element={<PaginaPdf/>}/>
+            
             </Routes>
       </BrowserRouter>
     </div>

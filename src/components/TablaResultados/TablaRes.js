@@ -20,11 +20,12 @@ const TablaRes = () => {
 
   return (
     <div className='container'>
-      <h1 >Tabla de Resultados</h1>
+      <h1 style={{ color: "#3388af", fontSize: "30px", padding:"2rem" }} >Tabla de Resultados</h1>
       
       {hayDatos ? (
 
         <>
+          
         <div class='row'>
           <div class="col-md-7">
             <table className="table table-bordered">

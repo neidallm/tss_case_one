@@ -1,5 +1,5 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+
 import LinesChart from './LineChart';
 
 const Grafica = () => {
@@ -7,18 +7,18 @@ const Grafica = () => {
   const datosLocalStorage = JSON.parse(localStorage.getItem('datos')) || [];
   const hayDatos = datosLocalStorage.length > 0;
   return (
-    <>
-        <div className="col-lg-10">
+    <div className='container'>
+        <div className="col-lg-8 mx-auto text-center" >
           {
             hayDatos?(
               <>
-              <h2>Gráfico de Línea</h2>
+              <h2 className='titulo'>Gráfico de Línea</h2>
               <LinesChart></LinesChart>
               <br/>
               </>
             ):(
               <>
-              <h2>No se encuentró ningún dato</h2>
+              <h2 style={{ color: "#3388af", fontSize: "42px", padding:"3rem" }}>No se encuentró ningún dato</h2>
               </>
             )
           }
@@ -26,7 +26,7 @@ const Grafica = () => {
         {/* <div className="col-md-3">
     
         </div> */}
-    </>
+    </div>
   );
 };
 

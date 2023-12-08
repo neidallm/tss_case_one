@@ -4,14 +4,18 @@
   "private": true,
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@react-pdf/renderer": "^3.1.14",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.2",
     "chart.js": "^4.4.0",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "formik": "^2.4.5",
     "formik-material-ui": "^4.0.0-alpha.2",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-chartjs-2": "^5.2.0",
@@ -44,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss-animated": "^1.0.1"
   }
 }

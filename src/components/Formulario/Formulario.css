@@ -40,3 +40,11 @@
 .Miboton{
   margin-bottom: 2rem;
 }
+
+.miParrafo{
+
+  display: block;
+  background-color: aqua;
+  border-radius: 20px;
+  padding: 1rem;
+}
