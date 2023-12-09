@@ -13,8 +13,10 @@ const Grafica = () => {
             hayDatos?(
               <>
               <h2 className='titulo'>Gráfico de Línea</h2>
+              <h2 style={{ color: "#3388af", fontSize: "14px", padding:"2rem" }}>El gráfico de resultados representa una relación entre el número de trabajadores y el costo asociado . En este gráfico, el eje horizontal (eje x) muestra la cantidad de trabajadores, mientras que el eje vertical (eje y) representa el costo correspondiente expresado en la moneda seleccionada. <br/> <br/>
+              Esta representación visual proporciona una visión clara de cómo varía el costo a medida que cambia el número de trabajadores.</h2>
               <LinesChart></LinesChart>
-              <br/>
+              <br/><br/>
               </>
             ):(
               <>

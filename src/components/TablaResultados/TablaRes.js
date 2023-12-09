@@ -28,6 +28,7 @@ const TablaRes = () => {
           
         <div class='row'>
           <div class="col-md-7">
+            {/* <p>"La tabla de resultados muestra una relación entre el número de trabajadores y el costo total asociado en una determinada situación. Estos valores representan diferentes escenarios o situaciones donde se ha calculado el costo total correspondiente a un número específico de empleados.</p> */}
             <table className="table table-bordered">
               <thead>
                 <tr>

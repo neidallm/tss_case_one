@@ -203,41 +203,42 @@ let datoslocales = [{
               
               if (!valores.par1) {             
                 errores.par1 = "Por favor ingrese un valor"
-              }else if (/^[0-3]$/.test(valores.par1)) {
+              }else if (/^[0-6]$/.test(valores.par1)) {
                 errores.par1 = 'Solo puede contener números'
               }
 
              } else if(valores.distribucion == 2) {
               
-              if (!valores.par1) {             
-                errores.par1 = "Por favor ingrese un valor"
-              }else if (/^[a-zA-ZÀ-ÿ\s]{0,100}$/.test(valores.par1)) {
-                errores.par1 = 'Solo puede contener números'
+              if (!valores.par1 < 0) {
+                errores.par1 = "Por favor ingrese un valor positivo";
+              } else if (!/^[0-6]+$/.test(valores.par1)) {
+                errores.par1 = 'Solo puede contener números enteros positivos';
               }
+              
 
-              if (!valores.par2) {             
-                errores.par2 = "Por favor ingrese un valor"
-              }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.par2)) {
-                errores.par2 = 'Solo puede contener números'
+              if (!valores.par2 > 6) {             
+                errores.par2 = "Por favor ingrese un valor entre 1 y 6"
+              }else if (!/^[1-6]+$/.test(valores.par2)) {
+                errores.par2 = 'Solo puede contener números entre 1 y 6'
               }
 
              } else if(valores.distribucion == 3){
-              if (!valores.par1 || (valores.par1 > 3 || valores.par1 < 0)) {             
-                errores.par1 = "Por favor ingrese un valor"
-              }else if (/^[a-zA-ZÀ-ÿ\s]{0,3}$/.test(valores.par1)) {
-                errores.par1 = 'Solo puede contener números'
+              if (!valores.par1 < 0) {             
+                errores.par1 = "Por favor ingrese un valor positivo"
+              }else if (!/^[0-6]+$/.test(valores.par1)) {
+                errores.par1 = 'Solo puede contener números enteros positivos'
               }
               
-              if (!valores.par2) {             
-                errores.par2 = "Por favor ingrese un valor"
-              }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.par2)) {
-                errores.par2 = 'Solo puede contener números'
+              if (!valores.par2 > 6) {             
+                errores.par2 = "Por favor ingrese un valor entero positivo"
+              }else if (!/^[1-6]+$/.test(valores.par2)) {
+                errores.par2 = 'Solo puede contener números entre 1 y 6'
               }
 
-              if (!valores.par3) {             
-                errores.par3 = "Por favor ingrese un valor"
-              }else if (/^[a-zA-ZÀ-ÿ\s]{1,100}$/.test(valores.par3)) {
-                errores.par3 = 'Solo puede contener números'
+              if (!valores.par3 < 0 ) {             
+                errores.par3 = "Por favor ingrese un valor enteros positivos"
+              }else if (!/^[1-6]+$/.test(valores.par3)) {
+                errores.par3 = 'Solo puede contener números entre 1 y 6'
               }
              }
           return errores;
@@ -352,6 +353,7 @@ let datoslocales = [{
                     class="form-control"  
                     id='costoEspera'
                     name='par1'  
+                    min="0"
                     placeholder="Promedio camiones/Hora"  
                     />
                     {touched.par1 && errors.par1 && <div className="error" >{errors.par1}</div>}
@@ -366,6 +368,7 @@ let datoslocales = [{
                       id='costoEspera'
                       name='par1'  
                       placeholder="Mínimo de camiones/Hora"  
+                      min="0"
                     />
                     {touched.par1 && errors.par1 && <div className="error" >{errors.par1}</div>}
 
@@ -374,7 +377,8 @@ let datoslocales = [{
                       type="number" 
                       class="form-control"  
                       id='costoEspera'
-                      name='par2'  
+                      name='par2'
+                      min="0"  
                       placeholder="Máximo de camiones/Hora"  
                     />
                     {touched.par2 && errors.par2 && <div className="error" >{errors.par2}</div>}
@@ -386,7 +390,8 @@ let datoslocales = [{
                   type="number" 
                   class="form-control"  
                   id='costoEspera'
-                  name='par1'  
+                  name='par1' 
+                  min="0" 
                   placeholder="Escriba aqui el a"  
                  />
                   {touched.par1 && errors.par1 && <div className="error" >{errors.par1}</div>}
@@ -396,7 +401,8 @@ let datoslocales = [{
                   type="number" 
                   class="form-control"  
                   id='costoEspera'
-                  name='par2'  
+                  name='par2'
+                  min="0"  
                   placeholder="Escriba aqui el b"  
                  />
                   {touched.par2 && errors.par2 && <div className="error" >{errors.par2}</div>}
@@ -406,7 +412,8 @@ let datoslocales = [{
                   type="number" 
                   class="form-control"  
                   id='costoEspera'
-                  name='par3'  
+                  name='par3'
+                  min="0"  
                   placeholder="Escriba aqui el c"  
                  />
                  {touched.par3 && errors.par3 && <div className="error" >{errors.par3}</div>}
