@@ -201,10 +201,10 @@ let datoslocales = [{
 
              if (valores.distribucion == 1) {
               
-              if (!valores.par1) {             
-                errores.par1 = "Por favor ingrese un valor"
-              }else if (/^[0-6]$/.test(valores.par1)) {
-                errores.par1 = 'Solo puede contener números'
+              if (!valores.par1 < 0) {
+                errores.par1 = "Por favor ingrese un valor positivo";
+              } else if (!/^[0-6]+$/.test(valores.par1)) {
+                errores.par1 = 'Solo puede contener números enteros positivos';
               }
 
              } else if(valores.distribucion == 2) {
@@ -422,10 +422,13 @@ let datoslocales = [{
                  :<></>}
 
                 <div class="row">
-                <div class=' botones' >
-                    <button  type='submit' onClick={handleSubmit}  class="btn btn-primary registrarGuardia Miboton " >Calcular</button>  
-                    <button  type='submit' onClick={handleSubmit}  class="btn btn-secondary registrarGuardia Miboton " >Calcular</button> 
-                  </div>
+                    <div class="col">
+                      <button  type='submit' onClick={handleSubmit}  class="btn btn-primary registrarGuardia Miboton " >Calcular</button>  
+                    </div>
+                    
+                    <div class="col">
+                      <button  type='submit' onClick={handleSubmit}  class="btn btn-secondary registrarGuardia Miboton " >Borrar</button>  
+                    </div>
                     <br/>
                 </div>
               </div>
