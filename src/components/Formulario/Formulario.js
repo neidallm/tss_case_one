@@ -283,7 +283,7 @@ let datoslocales = [{
     }}
  > 
 
-       {({ values, errors, touched, handleSubmit,})=>(
+       {({ values, errors, touched, handleSubmit})=>(
         <form ><br/>
           <div class="row mr-3">
             <br/>
@@ -425,9 +425,19 @@ let datoslocales = [{
                     <div class="col">
                       <button  type='submit' onClick={handleSubmit}  class="btn btn-primary registrarGuardia Miboton " >Calcular</button>  
                     </div>
-                    
+
                     <div class="col">
-                      <button  type='submit' onClick={handleSubmit}  class="btn btn-secondary registrarGuardia Miboton " >Borrar</button>  
+                      <button  type='submit' onClick={()=>{
+                        values.costoEspera = ""; 
+                        values.distribucion =""; 
+                        values.nroTrabajadores=""; 
+                        values.par1=""; 
+                        values.par2=""; 
+                        values.par3=""; 
+                        values.sueldo =""; 
+                        values.tipoDeCambio=""; 
+                        localStorage.clear();
+                    }}  class="btn btn-secondary registrarGuardia Miboton " >Borrar</button>  
                     </div>
                     <br/>
                 </div>
