@@ -30,7 +30,8 @@ const tablaNroTrabajador = [{
 
 
 const tablaAcumuladaC = [{
-    nro:0,ran:0,
+    nro:0,
+    ran:0,
     limInf:0,
     limSup:0.15
     },
