@@ -150,7 +150,7 @@ let objetoConMinimo = {
             par3:datosLocalStorage[0].par3
           }:
           {
-            tipoDeCambio: 1,
+            tipoDeCambio: 2,
             nroTrabajadores:'',
             sueldo:'',
             costoEspera:'',
