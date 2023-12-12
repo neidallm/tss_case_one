@@ -95,13 +95,6 @@ const Inicio = () => {
                <a type="button" class=" btn btn-secondary btn-lg miRef" href='/Calcular'>Comenzar</a> 
               
           </div>
-                     
-             
-            
-             
-                            
-            
-        
         {/* </div> */}
        </div>
       </div>
