@@ -48,7 +48,7 @@ const Header = () => {
               </li>
               <li className="miLista">
                 <a className="nav-link" href="/Conclucion">
-                <strong>Conclución</strong>
+                <strong>Conclusión</strong>
                 </a>
               </li>
               <li className="miLista">

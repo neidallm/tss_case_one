@@ -16,7 +16,7 @@ const Conclucion = () => {
   <>
     <Header/>
     <div className='container'>
-        <h1 style={{ color: "#3388af", fontSize: "30px", padding:"2rem" }} >Concluciones</h1>
+        <h1 style={{ color: "#3388af", fontSize: "30px", padding:"2rem" }} >Conclusiones</h1>
     <div className='row'>
         <div className="col-md-6">
         <img src={costo} alt="costo" />
