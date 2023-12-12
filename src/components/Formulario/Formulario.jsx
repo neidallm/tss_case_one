@@ -11,17 +11,6 @@ let objetoConMinimo = {
   costTotal:0,
 };
 
-let datoslocales = [{
-  nroTrabajadores:"",
-  sueldo:"",
-  costoEspera:"",
-  costPorMinuto:"",
-  distribucion:"",
-  par1: "",
-  par2: "",
-  par3: "",
-  tipoDeCambio: ""
-},];
 
   const Formulario = () => {
 
@@ -72,7 +61,6 @@ let datoslocales = [{
 
   }
 
-  console.log(tablaAcumuladaC);
 
   const infoString = JSON.stringify(tablaNroTrabajador);
   localStorage.setItem('tablaTrab', infoString);
@@ -273,12 +261,8 @@ let datoslocales = [{
         });
       
         setShowSpinner(false);
-
         setSuccessMessage('Cálculo completado exitosamente');
-       
-      
         setSubmitting(false);
-
 
     }}
  > 
