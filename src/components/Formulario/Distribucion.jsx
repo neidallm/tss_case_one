@@ -17,12 +17,8 @@
         return (k - 1) / lambda;
     }
 
-    export function name(params) {
 
-    }
-
-
-    function distribucionTriangular(minimo, maximo, masProbable) {
+    export function distribucionTriangular(minimo, maximo, masProbable) {
         // Verificar que los parámetros sean válidos
         if (minimo > maximo || masProbable < minimo || masProbable > maximo) {
           throw new Error("Parámetros inválidos");
@@ -41,6 +37,7 @@
         return Math.trunc(resultado); // 
     }
 
+    
     
 
     
