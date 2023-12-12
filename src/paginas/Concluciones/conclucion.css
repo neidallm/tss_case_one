@@ -1,0 +1,8 @@
+.miConclucion{
+    display: block;
+    background-color:rgb(219, 213, 179);
+    border-radius: 20px;
+    padding: 1rem;
+    color: black;
+    font-weight: bold;
+}

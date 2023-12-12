@@ -91,15 +91,10 @@ const Inicio = () => {
               <p class="h5 card-text miParafo">
                Encontrar el tamaño óptimo del equipo para minimizar el costo total, incluyendo salarios y costo por camiones esperando.</p>
             </div>
-               <a type="button"  className="btn btn-secondary btn-lg miRef" href='/Calcular'>Comenzar</a> 
+         
+               <a type="button" class=" btn btn-secondary btn-lg miRef" href='/Calcular'>Comenzar</a> 
+              
           </div>
-                     
-             
-            
-             
-                            
-            
-        
         {/* </div> */}
        </div>
       </div>
