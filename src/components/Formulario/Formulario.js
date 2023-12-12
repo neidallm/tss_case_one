@@ -201,10 +201,10 @@ let datoslocales = [{
 
              if (valores.distribucion == 1) {
               
-              if (!valores.par1) {             
+              if (!valores.par1 ) {             
                 errores.par1 = "Por favor ingrese un valor"
-              }else if (/^[0-6]$/.test(valores.par1)) {
-                errores.par1 = 'Solo puede contener números'
+              }else if (!/^[0-6]$/.test(valores.par1)) {
+                errores.par1 = 'Solo puede contener números del 1 al 6'
               }
 
              } else if(valores.distribucion == 2) {
