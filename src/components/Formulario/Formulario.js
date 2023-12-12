@@ -162,7 +162,7 @@ let datoslocales = [{
             par3:datosLocalStorage[0].par3
           }:
           {
-            tipoDeCambio: 1,
+            tipoDeCambio: 2,
             nroTrabajadores:'',
             sueldo:'',
             costoEspera:'',
@@ -422,10 +422,23 @@ let datoslocales = [{
                  :<></>}
 
                 <div class="row">
-                <div class=' botones' >
-                    <button  type='submit' onClick={handleSubmit}  class="btn btn-primary registrarGuardia Miboton " >Calcular</button>  
-                    <button  type='submit' onClick={handleSubmit}  class="btn btn-secondary registrarGuardia Miboton " >Calcular</button> 
-                  </div>
+                    <div class="col">
+                      <button  type='submit' onClick={handleSubmit}  class="btn btn-primary registrarGuardia Miboton " >Calcular</button>  
+                    </div>
+
+                    <div class="col">
+                      <button  type='submit' onClick={()=>{
+                        values.costoEspera = ""; 
+                        values.distribucion =""; 
+                        values.nroTrabajadores=""; 
+                        values.par1=""; 
+                        values.par2=""; 
+                        values.par3=""; 
+                        values.sueldo =""; 
+                        values.tipoDeCambio=""; 
+                        localStorage.clear();
+                    }}  class="btn btn-secondary registrarGuardia Miboton " >Borrar</button>  
+                    </div>
                     <br/>
                 </div>
               </div>
